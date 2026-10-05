@@ -1114,3 +1114,766 @@ C. Removing human oversight
 D. Hiding model limitations
 
 ✅ **Answer: A**
+
+
+# 🔥 CAPGEMINI AI LITERACY — GENAI SCENARIO MCQs
+
+## Q1. RAG Scenario ⭐⭐⭐⭐⭐
+
+A company has an internal HR chatbot. Its HR policies are updated every month. The company wants the chatbot to answer using the latest policies.
+
+Which approach is MOST suitable?
+
+**A. Train the LLM from scratch every month**
+
+**B. Fine-tune the LLM every month**
+
+**C. Use RAG with an updated document knowledge base**
+
+**D. Increase temperature**
+
+### ✅ Answer: C — RAG
+
+**Why?**
+
+RAG retrieves the latest documents and gives them to the LLM as context.
+
+**Exam trick:**
+
+Changing knowledge frequently → **RAG**
+
+---
+
+## Q2. Hallucination ⭐⭐⭐⭐⭐
+
+An AI chatbot answers:
+
+> "According to Capgemini's 2025 policy, employees receive ₹50,000 for every certification."
+
+But no such policy exists.
+
+What is this an example of?
+
+A. Tokenization
+
+B. Hallucination
+
+C. Fine-tuning
+
+D. Embedding
+
+### ✅ Answer: B — Hallucination
+
+The AI generated a believable but unsupported fact.
+
+---
+
+## Q3. Hallucination Reduction ⭐⭐⭐⭐⭐
+
+A company wants to reduce hallucinations in its customer-support chatbot.
+
+Which approach is BEST?
+
+A. Increase temperature
+
+B. Remove all context
+
+C. Use RAG with trusted company documents
+
+D. Make the prompt shorter
+
+### ✅ Answer: C
+
+RAG provides relevant external information to ground the response.
+
+**Follow-up thinking:**
+
+RAG does **not guarantee zero hallucination**.
+
+---
+
+# 🔥 Q4. Fine-Tuning vs RAG
+
+A company wants an AI assistant that always responds in a particular writing style.
+
+The company does NOT need frequently changing information.
+
+Which approach is more appropriate?
+
+A. RAG only
+
+B. Fine-tuning may be appropriate
+
+C. Increase context window
+
+D. Tokenization
+
+### ✅ Answer: B
+
+Fine-tuning can help adapt model behavior/style.
+
+**Remember:**
+
+-  Changing knowledge → RAG 
+-  Behavior/style/task adaptation → Fine-tuning 
+
+---
+
+# 🔥 Q5. RAG Retrieval
+
+A RAG chatbot retrieves three documents for a user's question, but all three are irrelevant.
+
+What is the MOST likely problem?
+
+A. Retrieval quality
+
+B. Temperature only
+
+C. UI design
+
+D. Programming language
+
+### ✅ Answer: A
+
+RAG has multiple stages. If irrelevant documents are retrieved, investigate:
+
+**chunking → embeddings → retrieval → filtering/reranking**
+
+---
+
+# 🔥 Q6. Embedding Scenario
+
+A user asks:
+
+> "How can I reset my password?"
+
+The document contains:
+
+> "Steps for recovering access to your account."
+
+There is no exact keyword match, but the meanings are similar.
+
+Which technology can help retrieve the relevant document?
+
+A. Semantic embeddings
+
+B. Sorting
+
+C. Compilation
+
+D. Encryption
+
+### ✅ Answer: A
+
+Embeddings capture semantic relationships.
+
+---
+
+# 🔥 Q7. Vector Database
+
+A RAG system stores thousands of document embeddings and needs to find the documents most similar to a user's query.
+
+What should be used?
+
+A. Vector database/index
+
+B. Compiler
+
+C. Stack
+
+D. Operating system
+
+### ✅ Answer: A
+
+Vector databases are designed for efficient similarity search.
+
+---
+
+# 🔥 Q8. Prompt Engineering ⭐⭐⭐⭐⭐
+
+Which is the BEST prompt?
+
+### A
+
+> Explain AI.
+
+### B
+
+> Tell me AI.
+
+### C
+
+> Explain Generative AI in 100 words for a beginner. Give 2 real-world examples and mention one limitation.
+
+### D
+
+> AI explain.
+
+### ✅ Answer: C
+
+Why?
+
+It specifies:
+
+-  task 
+-  audience 
+-  length 
+-  examples 
+-  limitation 
+
+**Capgemini trick:** More specific prompt ≠ always longer prompt. It should be **clear and relevant**.
+
+---
+
+# 🔥 Q9. Few-Shot Prompting
+
+A developer wants an AI model to classify support tickets.
+
+They provide:
+
+```
+```
+
+```
+"Payment failed" → Billing
+
+"App crashes" → Technical
+
+"Cannot login" → Account
+
+"Refund not received" → ?
+```
+
+What prompting technique is being used?
+
+A. Zero-shot
+
+B. Few-shot
+
+C. Fine-tuning
+
+D. RAG
+
+### ✅ Answer: B — Few-shot
+
+Examples are provided before the actual task.
+
+---
+
+# 🔥 Q10. Zero-Shot
+
+A user asks:
+
+> "Classify this review as Positive or Negative."
+
+No examples are provided.
+
+Which technique?
+
+A. Few-shot
+
+B. Zero-shot
+
+C. Fine-tuning
+
+D. RAG
+
+### ✅ Answer: B
+
+No examples → **Zero-shot**
+
+---
+
+# 🔥 Q11. Temperature Scenario ⭐⭐⭐⭐
+
+A company is generating legal reports using an LLM. They want responses to be consistent and predictable.
+
+Which setting is generally more suitable?
+
+A. High temperature
+
+B. Lower temperature
+
+C. Random temperature
+
+D. Maximum temperature
+
+### ✅ Answer: B
+
+Lower temperature generally makes generation more predictable.
+
+**Important:** Temperature does not make the model factually correct by itself.
+
+---
+
+# 🔥 Q12. Creative Writing
+
+A marketing team wants an AI to generate many creative slogan ideas.
+
+Which setting would generally encourage more variation?
+
+A. Higher temperature
+
+B. Lower temperature
+
+C. Zero context
+
+D. No prompt
+
+### ✅ Answer: A
+
+Higher temperature generally increases variation/randomness.
+
+---
+
+# 🔥 Q13. Context Window ⭐⭐⭐⭐⭐
+
+A user uploads a very large document, but the model has a limited context window.
+
+What is a good solution?
+
+A. Send the entire document repeatedly
+
+B. Use chunking and retrieve only relevant sections
+
+C. Increase temperature
+
+D. Remove the prompt
+
+### ✅ Answer: B
+
+This is a common reason to use **RAG**.
+
+---
+
+# 🔥 Q14. Tokens
+
+Which statement is TRUE?
+
+A. Every token is exactly one word
+
+B. One word can never contain multiple tokens
+
+C. A token may represent a word, subword or punctuation
+
+D. Tokens are the same as embeddings
+
+### ✅ Answer: C
+
+**Token ≠ word ≠ embedding**
+
+Very important.
+
+---
+
+# 🔥 Q15. LLM
+
+How does a typical autoregressive LLM generate text?
+
+A. It retrieves the exact answer from a database
+
+B. It predicts/generates tokens based on context
+
+C. It searches Google for every answer
+
+D. It only copies training data
+
+### ✅ Answer: B
+
+LLMs commonly generate text through next-token prediction.
+
+---
+
+# 🔥 Q16. LLM is NOT a database ⭐⭐⭐⭐
+
+Which statement is most accurate?
+
+A. An LLM is simply a database containing every training document
+
+B. An LLM learns patterns in its parameters and generates outputs
+
+C. An LLM always verifies facts before answering
+
+D. An LLM cannot generate new content
+
+### ✅ Answer: B
+
+This is a **tricky conceptual question**.
+
+---
+
+# 🔥 Q17. Transformer
+
+Why are Transformers important in modern LLMs?
+
+A. They use attention mechanisms to model relationships between tokens
+
+B. They remove the need for data
+
+C. They are databases
+
+D. They only work for images
+
+### ✅ Answer: A
+
+**Transformer → Attention → modern LLM architecture**
+
+---
+
+# 🔥 Q18. Attention
+
+Consider:
+
+> "The dog chased the ball because **it** was moving."
+
+The model needs to understand what "it" refers to.
+
+Which mechanism helps a Transformer understand relationships between tokens?
+
+A. Attention
+
+B. Sorting
+
+C. Hashing
+
+D. Compilation
+
+### ✅ Answer: A
+
+Attention helps the model weigh relationships between tokens.
+
+---
+
+# 🔥 Q19. Generative AI
+
+Which is the BEST example of Generative AI?
+
+A. Predicting whether a transaction is fraudulent
+
+B. Detecting whether an image contains a cat
+
+C. Generating a new email from a user's instructions
+
+D. Sorting employee salaries
+
+### ✅ Answer: C
+
+Generating new content → **Generative AI**
+
+---
+
+# 🔥 Q20. Traditional AI vs GenAI
+
+A system receives an email and predicts:
+
+> Spam / Not Spam
+
+This is primarily:
+
+A. Generative AI
+
+B. Classification
+
+C. Text generation
+
+D. RAG
+
+### ✅ Answer: B
+
+Classification is different from generation.
+
+---
+
+# 🔥 Q21. AI Agent ⭐⭐⭐⭐⭐
+
+A user tells an AI:
+
+> "Find the cheapest flight, check my calendar, choose a suitable date, and book it."
+
+The system plans multiple steps and uses external tools.
+
+What does this best represent?
+
+A. Simple text generation
+
+B. Agentic AI
+
+C. Tokenization
+
+D. Embedding
+
+### ✅ Answer: B — Agentic AI
+
+**GenAI:** creates content.
+
+**Agentic AI:** can plan/act/use tools toward a goal.
+
+---
+
+# 🔥 Q22. Agent vs Chatbot
+
+Which capability most strongly differentiates an AI agent from a basic chatbot?
+
+A. Generating text
+
+B. Using tools and executing multi-step actions toward a goal
+
+C. Processing tokens
+
+D. Having a prompt
+
+### ✅ Answer: B
+
+---
+
+# 🔥 Q23. Responsible AI ⭐⭐⭐⭐⭐
+
+An AI recruitment system consistently gives lower scores to candidates from a particular demographic group.
+
+What should the organization investigate?
+
+A. Bias
+
+B. Tokenization
+
+C. Temperature
+
+D. Context window
+
+### ✅ Answer: A
+
+This is a Responsible AI issue.
+
+---
+
+# 🔥 Q24. AI Output Validation ⭐⭐⭐⭐⭐
+
+An AI assistant generates code that looks correct.
+
+What should a developer do before using it in production?
+
+A. Trust it automatically
+
+B. Validate, test and review the output
+
+C. Increase temperature
+
+D. Remove all comments
+
+### ✅ Answer: B
+
+**AI-generated output must be reviewed.**
+
+This is particularly important because recent Capgemini AI-literacy material emphasizes **output validation**. 
+
+---
+
+# 🔥 Q25. AI Coding Assistant
+
+A developer asks an AI coding assistant:
+
+> "Create a login API."
+
+The generated code contains an SQL injection vulnerability.
+
+What is the BEST response?
+
+A. Deploy immediately
+
+B. Review and test the generated code for security issues
+
+C. Increase temperature
+
+D. Assume AI knows security
+
+### ✅ Answer: B
+
+AI-assisted coding still requires human review.
+
+---
+
+# 🔥 Q26. Prompt + Context
+
+Which prompt would likely produce the most useful answer?
+
+A.
+
+> "Fix."
+
+B.
+
+> "This Java method returns incorrect results for duplicate values. Analyze the code, identify the bug, provide corrected code, and explain the time complexity."
+
+C.
+
+> "Java."
+
+D.
+
+> "Help."
+
+### ✅ Answer: B
+
+It contains:
+
+**Context + problem + task + expected output**
+
+---
+
+# 🔥 Q27. RAG vs Fine-Tuning — Tricky
+
+A company wants an AI assistant to answer questions from a **100-page employee handbook**. The handbook changes every month.
+
+Best approach?
+
+A. Fine-tune every month
+
+B. RAG
+
+C. Train an LLM from scratch
+
+D. Increase temperature
+
+### ✅ Answer: B
+
+---
+
+# 🔥 Q28. Fine-Tuning — Tricky
+
+A company wants an LLM to consistently follow a specialized response style and task format.
+
+Which may be appropriate?
+
+A. Fine-tuning
+
+B. Tokenization only
+
+C. Vector search only
+
+D. Increasing context window
+
+### ✅ Answer: A
+
+---
+
+# 🔥 Q29. Grounding
+
+A medical chatbot is required to answer only using an approved medical knowledge base.
+
+Which concept is MOST relevant?
+
+A. Grounding
+
+B. High temperature
+
+C. Random generation
+
+D. Zero-shot only
+
+### ✅ Answer: A
+
+Grounding means anchoring responses to trusted/relevant information.
+
+---
+
+# 🔥 Q30. RAG Failure
+
+A RAG system retrieves the wrong document and the LLM gives an incorrect answer based on it.
+
+Which statement is TRUE?
+
+A. RAG always guarantees correct answers
+
+B. Retrieval quality directly affects answer quality
+
+C. Temperature automatically fixes retrieval
+
+D. Fine-tuning automatically fixes every retrieval problem
+
+### ✅ Answer: B
+
+This is a very important **scenario-based concept**.
+
+---
+
+# 🧠 CAPGEMINI TRICKY QUESTIONS
+
+इनमें options बहुत similar हो सकते हैं:
+
+### Q31.
+
+A model has excellent language generation but outdated company information. What should you add?
+
+**A. RAG**
+
+B. Higher temperature
+
+C. More random prompts
+
+D. Tokenization
+
+✅ **A**
+
+---
+
+### Q32.
+
+You want the AI to return output in a specific JSON structure. What should your prompt include?
+
+A. Clear output format
+
+B. Only "Do it"
+
+C. Higher temperature
+
+D. No context
+
+✅ **A**
+
+---
+
+### Q33.
+
+Which is NOT a reliable way to eliminate hallucination?
+
+A. Grounding
+
+B. Retrieval
+
+C. Verification
+
+D. Increasing temperature
+
+✅ **D**
+
+---
+
+### Q34.
+
+Which combination is most appropriate for a reliable enterprise chatbot?
+
+A. LLM only
+
+B. LLM + RAG + validation + access controls
+
+C. LLM + high temperature
+
+D. LLM + random prompts
+
+✅ **B**
+
+---
+
+### Q35.
+
+An AI gives a different answer every time for the same type of task. Which factor can contribute to this?
+
+A. Decoding/temperature
+
+B. SQL schema only
+
+C. HTML
+
+D. CPU brand
+
+✅ **A**
