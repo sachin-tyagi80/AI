@@ -692,10 +692,17 @@ An answer can be factually correct but still violate privacy, ignore company pol
 
 ## Level 5: Scenario-based interview follow-ups
 These questions test whether you can apply LLM concepts to real situations.
-### Scenario 1: A company's policies change weekly. Its chatbot must answer using the latest policy documents. What would you recommend?Suggested answerUse RAG with an updated, trusted document source. Retrieve relevant policy sections for each question and instruct the model to ground its answer in them.Interviewer follow-upWhy not fine-tune every week? Because retrieval can make updated documents available without retraining the model for each change.
-### Scenario 2: An LLM generates a fake citation with complete confidence. How would you address this?Suggested answerRetrieve information from reliable sources, require citations to retrieved material, and verify that the cited sources actually support the claims.Interviewer follow-upDoes confident language prove correctness? No. Fluency and confidence do not guarantee factual accuracy.
+### Scenario 1: A company's policies change weekly. Its chatbot must answer using the latest policy documents. What would you recommend?
+Suggested answerUse RAG with an updated, trusted document source. Retrieve relevant policy sections for each question and instruct the model to ground its answer in them.
+Interviewer 
+follow-upWhy not fine-tune every week? Because retrieval can make updated documents available without retraining the model for each change.
+### Scenario 2: An LLM generates a fake citation with complete confidence. How would you address this?
+Suggested answerRetrieve information from reliable sources, require citations to retrieved material, and verify that the cited sources actually support the claims.
+Interviewer follow-upDoes confident language prove correctness? No. Fluency and confidence do not guarantee factual accuracy.
 ### Scenario 3: A very long document cannot fit into the model's context window. What would you do?Suggested answerSplit it into chunks, index or search those chunks, and retrieve the most relevant sections before generating the answer.Interviewer follow-upWhat is the role of embeddings? They can support semantic retrieval by representing text as vectors.
-### Scenario 4: A team wants consistent JSON from an LLM, but sometimes the model returns invalid JSON.Suggested answerSpecify a strict output schema, use structured-output capabilities where available, and validate the result programmatically.Interviewer follow-upIs a prompt alone sufficient? Not always. Application-level validation is important.
+### Scenario 4: A team wants consistent JSON from an LLM, but sometimes the model returns invalid JSON.
+Suggested answerSpecify a strict output schema, use structured-output capabilities where available, and validate the result programmatically.
+Interviewer follow-upIs a prompt alone sufficient? Not always. Application-level validation is important.
 ### Scenario 5: A model produces repetitive slogans, and a marketing team wants more varied suggestions.Suggested answerTry increasing the temperature moderately and refine the prompt with clear creative goals and constraints.Interviewer follow-upDoes higher temperature improve factual accuracy? No. It generally increases output variability.
 
 #### Quick revision: 18 questions you should be able to answer
