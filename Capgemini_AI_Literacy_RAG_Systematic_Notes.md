@@ -7,19 +7,23 @@
 
 1. [What is RAG?](#1-what-is-rag)
 2. [Why is RAG Needed?](#2-why-is-rag-needed)
-3. [Complete RAG Workflow — Basic to Advanced](#3-complete-rag-workflow--basic-to-advanced)
+3. [Complete RAG Workflow](#3-complete-rag-workflow--basic-to-advanced)
 4. [Important RAG Concepts](#4-important-rag-concepts)
-   - [Chunking](#a-chunking)
-   - [Embeddings](#b-embeddings)
-   - [Vector Database](#c-vector-database)
-   - [Semantic Search vs Keyword Search](#d-semantic-search-vs-keyword-search)
-   - [Reranking](#e-reranking)
 5. [RAG vs Fine-tuning vs Prompt Engineering](#5-rag-vs-fine-tuning-vs-prompt-engineering)
 6. [RAG Limitations and Failure Cases](#6-rag-limitations-and-failure-cases)
-7. [Capgemini-Style Hard Scenario MCQs](#7-capgemini-style-hard-scenario-mcqs)
-8. [Interviewer Questions with Sample Answers](#8-interviewer-questions-with-sample-answers)
-9. [Quick Revision Before the Assessment](#9-quick-revision-before-the-assessment)
-10. [Next Topics in the RAG Sequence](#10-next-topics-in-the-rag-sequence)
+7. [RAG Fundamentals: Hard Scenario MCQs](#7-capgemini-style-hard-scenario-mcqs)
+8. [RAG Interview Questions](#8-interviewer-questions-with-sample-answers)
+9. [Quick Revision](#9-quick-revision-before-the-assessment)
+10. [Advanced RAG: Hybrid Search](#10-advanced-rag-hybrid-search)
+11. [Advanced RAG: Reranking](#11-advanced-rag-reranking)
+12. [RAG Evaluation Metrics](#12-rag-evaluation-metrics)
+13. [Advanced RAG: Scenario MCQs](#13-advanced-rag-scenario-mcqs)
+14. [Advanced RAG: Interview Follow-ups](#14-advanced-rag-interview-follow-ups)
+15. [Choosing RAG, Fine-tuning, or Prompt Engineering](#15-choosing-rag-fine-tuning-or-prompt-engineering)
+16. [Fine-tuning Types](#16-fine-tuning-types)
+17. [Decision-Making Scenario MCQs](#17-decision-making-scenario-mcqs)
+18. [Interview Follow-up Questions](#18-interview-follow-up-questions)
+19. [Roadmap Next Steps](#19-roadmap-next-steps)
 
 ---
 
@@ -376,13 +380,408 @@ Retrieval Recall@k or Precision@k, answer correctness, faithfulness to retrieved
 - **RAG limitation:** It does not guarantee truth.
 - **Fine-tuning:** Adapt model behavior through training.
 - **Security:** Retrieved content is data, not automatically trusted instructions.
+---
 
-## 10. Next Topics in the RAG Sequence
+## 10. Advanced RAG: Hybrid Search
 
-Next in the RAG sequence:
+### 10.1 Keyword Search vs Semantic Search vs Hybrid Search
 
-1. Advanced retrieval strategies
-2. Hybrid search
-3. Reranking
-4. Evaluation metrics
-5. RAG vs fine-tuning scenario questions
+Example: An employee asks, “What does error code EMP-407 mean?” The company document says: “EMP-407 — Payroll authorization failed.”
+
+**A. Keyword search**
+- Matches exact terms, keywords, and identifiers.
+- Example: Search for `EMP-407` in the document.
+
+**B. Semantic search**
+- Finds relevant text based on meaning and context.
+- Example: “Why can't payroll access be authorized?”
+
+**C. Hybrid search**
+- Combines keyword and semantic retrieval, helping handle exact identifiers as well as meaning-based queries.
+- Example: Retrieve information about the exact code `EMP-407` and its meaning.
+
+**Interview point:** Hybrid search can be useful when a knowledge base contains natural-language documents alongside exact IDs, product codes, error numbers, or technical terms. It is not automatically best for every dataset; evaluate it.
+
+### 10.2 Hybrid RAG Workflow
+
+1. **User query:** “Explain EMP-407 payroll failure.”
+2. **Keyword retrieval:** Match the exact code.
+3. **Semantic retrieval:** Match related meaning.
+4. **Combine results:** Merge and rank relevant passages.
+5. **Generation:** The LLM uses retrieved evidence as context.
+
+A common result-combination method is **Reciprocal Rank Fusion (RRF)**, which combines different search rankings. Some systems use weighted score fusion.
+
+---
+
+## 11. Advanced RAG: Reranking
+
+### 11.1 What is reranking?
+
+An initial retriever finds potentially relevant documents, but the best document may not appear near the top. A reranker scores the retrieved passages again against the query and improves their order.
+
+**Illustrative initial ranking**
+
+| Initial rank | Retrieved passage | Relevance |
+|---:|---|---|
+| 1 | General payroll guide | Medium |
+| 2 | Employee payment FAQs | Medium |
+| 3 | EMP-407 troubleshooting steps | Very high |
+
+If the system only selects the top two passages, the useful troubleshooting steps may be missed.
+
+**Illustrative ranking after reranking**
+
+| New rank | Retrieved passage |
+|---:|---|
+| 1 | EMP-407 troubleshooting steps |
+| 2 | Employee payment FAQs |
+| 3 | General payroll guide |
+
+Actual ranking depends on the retriever and reranker quality.
+
+**Remember the distinction:**
+- **Retriever:** Which documents may be relevant?
+- **Reranker:** Which retrieved documents are most relevant?
+- **LLM:** How should the answer be generated from the selected context?
+
+**Scenario:** The initial retriever returns the correct document, but its rank is poor. Reranking is the targeted improvement; fine-tuning the LLM is not automatically the right fix.
+
+---
+
+## 12. RAG Evaluation Metrics
+
+### 12.1 Recall@k and Precision@k
+
+These metrics measure how effectively the retrieval system finds relevant documents.
+
+Suppose a query has **4 relevant documents** in the knowledge base. The system returns the top 5 results, of which 3 are relevant.
+
+**Recall@5**
+
+\[
+\text{Recall@5} = \frac{3}{4} = 0.75 = 75\%
+\]
+
+This asks: Of all relevant documents, how many were found in the top 5?
+
+**Precision@5**
+
+\[
+\text{Precision@5} = \frac{3}{5} = 0.60 = 60\%
+\]
+
+This asks: Of the 5 retrieved documents, how many were relevant?
+
+**Memory trick:**
+- **Recall:** Are relevant documents being missed?
+- **Precision:** How many retrieved documents are irrelevant?
+
+### 12.2 Which metric matters in which scenario?
+
+| Scenario | Main focus |
+|---|---|
+| A medical knowledge search must avoid missing important evidence | High recall |
+| A customer-support bot should return fewer irrelevant documents | High precision |
+| Retrieved results need better ordering | Ranking metrics such as MRR or NDCG |
+| The LLM makes unsupported claims despite source context | Faithfulness / groundedness |
+| The final answer does not correctly answer the question | Answer correctness and relevance |
+
+### 12.3 Evaluation dimensions
+
+- **Recall@k / Precision@k:** Retrieval quality.
+- **MRR / NDCG:** Ranking quality.
+- **Faithfulness:** How closely the answer follows the retrieved evidence.
+- **Answer correctness:** How well the answer matches the expected answer.
+
+Good retrieval does not guarantee a good answer. Evaluate retrieval and generation separately as well as end-to-end.
+
+---
+
+## 13. Advanced RAG: Scenario MCQs
+
+These are practice questions, not official Capgemini exam questions.
+
+### MCQ 1 — Exact identifiers and different wording
+
+An enterprise chatbot searches thousands of policy documents. Exact product IDs are frequently missed by semantic search, while keyword search misses questions phrased differently from the documents. What should the team test first?
+
+A. Hybrid search combining keyword and semantic retrieval  
+B. Increasing LLM temperature  
+C. Fine-tuning on general conversation data  
+D. Removing document identifiers
+
+**Answer: A**
+
+Hybrid search combines exact-term matching with semantic retrieval, making it a strong candidate for mixed identifier and natural-language queries.
+
+### MCQ 2 — Correct passage ranked too low
+
+A RAG system retrieves the correct passage but places it at rank 12. Only the top 4 passages are sent to the LLM. Initial retrieval includes the passage, but its ranking is poor. What is the most targeted improvement?
+
+A. Increase the context window without changing retrieval  
+B. Use a reranker and evaluate top-k ranking  
+C. Fine-tune the LLM to memorize the passage  
+D. Increase generation temperature
+
+**Answer: B**
+
+The key failure is ordering. A reranker can reorder candidate passages so the most relevant evidence is more likely to enter the final context.
+
+### MCQ 3 — Recall and precision calculation
+
+There are 10 relevant documents for a query. The system retrieves 5 documents, and all 5 are relevant. What are Recall@5 and Precision@5?
+
+A. Recall 100%, Precision 50%  
+B. Recall 50%, Precision 100%  
+C. Recall 50%, Precision 50%  
+D. Recall 100%, Precision 100%
+
+**Answer: B**
+
+Recall@5 = 5/10 = 50%. Precision@5 = 5/5 = 100%. The retrieved set is clean, but half the relevant documents were missed.
+
+### MCQ 4 — Irrelevant retrieved passages
+
+A customer-support RAG bot retrieves 20 passages. Many are unrelated, but the correct answer is usually somewhere among them. Which evaluation result would most directly quantify the proportion of retrieved passages that are relevant?
+
+A. Precision@k  
+B. Recall@k  
+C. Output token count  
+D. Temperature
+
+**Answer: A**
+
+Precision@k measures the fraction of the top-k retrieved results that are relevant. Recall measures the fraction of all relevant items successfully retrieved.
+
+### MCQ 5 — Good recall but unsupported generation
+
+A team improves retrieval Recall@10 substantially, but answer correctness does not improve. The LLM frequently ignores the retrieved evidence and invents unsupported details. What should the team investigate next?
+
+A. Only increase the number of retrieved chunks again  
+B. Generation faithfulness, grounding instructions and answer evaluation  
+C. Assume the retrieval improvement proves the whole system is accurate  
+D. Remove citations to make answers more fluent
+
+**Answer: B**
+
+Better retrieval does not guarantee faithful generation. Evaluate whether the answer is supported by context and consider stricter grounding or abstention behavior.
+
+### MCQ 6 — Missing legal exceptions
+
+A legal assistant must find almost every relevant exception in a large collection of documents. Missing an exception is more serious than reviewing some extra passages. Which retrieval objective deserves particular attention?
+
+A. Recall  
+B. Precision alone  
+C. Output length  
+D. Temperature
+
+**Answer: A**
+
+High recall helps reduce missed relevant evidence. Precision still matters, but the scenario explicitly prioritizes finding exceptions over avoiding extra results.
+
+### MCQ 7 — Combining different retrieval scores
+
+A team combines keyword and vector search results. The two retrievers assign scores on very different numerical scales. What is a reasonable strategy for combining their rankings?
+
+A. Add raw scores without checking their scales  
+B. Use a rank-fusion approach such as RRF, or calibrated weighted fusion  
+C. Discard one retriever in every case  
+D. Use the LLM temperature as a score normalizer
+
+**Answer: B**
+
+RRF combines result ranks rather than relying directly on incomparable raw scores. Weighted fusion is another option when scores are appropriately calibrated.
+
+### MCQ 8 — Wrong citation
+
+A RAG chatbot provides accurate answers but often cites the wrong paragraph. Which evaluation dimension should be added or strengthened?
+
+A. Citation accuracy and evidence support  
+B. Only Recall@1  
+C. Only total number of indexed documents  
+D. Only response fluency
+
+**Answer: A**
+
+A correct answer does not guarantee that its citation supports the claim. Evaluate citation correctness and whether claims are grounded in the cited evidence.
+
+**Source quiz status:** 8/8 attempted; score shown as 8/8. The source also included the prompt “Explain my mistakes.”
+
+---
+
+## 14. Advanced RAG: Interview Follow-ups
+
+### Q1. Can high recall alone guarantee a good RAG answer?
+
+No. Recall measures retrieval coverage, not whether the LLM correctly uses the evidence. Generation faithfulness and answer correctness must also be evaluated.
+
+### Q2. Does reranking find documents that the initial retriever never returned?
+
+Usually, a reranker reorders the retrieved candidate set. If the relevant document is absent from that set, the system may need better candidate retrieval or a larger candidate pool.
+
+### Q3. When would you prefer keyword search over semantic search?
+
+For exact identifiers, error codes, product IDs, or precise technical terms, keyword search can be especially effective. Hybrid search can combine this with semantic matching.
+
+### Q4. What is the difference between Recall@k and MRR?
+
+Recall@k checks how many relevant documents appear within the top \(k\) results relative to all relevant documents. MRR focuses on how highly the first relevant result is ranked.
+
+### Q5. How do you debug a RAG application systematically?
+
+Inspect source freshness and permissions, evaluate retrieved passages, check ranking, and then test whether generated claims are supported by the retrieved context. Fix the stage responsible for the failure rather than changing the LLM blindly.
+
+---
+
+## 15. Choosing RAG, Fine-tuning, or Prompt Engineering
+
+### 15.1 Core difference
+
+- **RAG — Knowledge access:** Retrieve external documents or updated information to answer a question.  
+  **Example:** Answer from the latest company leave policy.
+
+- **Fine-tuning — Behavior adaptation:** Update model parameters or trainable components using examples to adapt task-specific behavior.  
+  **Example:** Consistently classify support tickets into company-specific categories.
+
+- **Prompt engineering — Instruction improvement:** Provide clearer instructions, constraints, examples, or output-format guidance.  
+  **Example:** Return the answer in a valid JSON format.
+
+### 15.2 Workplace scenarios
+
+| Scenario | Best first approach | Reason |
+|---|---|---|
+| HR policy changes every month | RAG | Retrieve information from an updated source. |
+| Model must follow a specific JSON schema | Prompt / structured-output constraints | Directly control the output format. |
+| Specialized classification behavior must improve using thousands of labeled examples | Evaluate fine-tuning | Training examples can adapt repeated task behavior. |
+| Model must answer from private company documents | RAG with access controls | Retrieve relevant, authorized documents. |
+| Model should keep answers short and professional | Prompt engineering | Tone and length can be guided by instructions. |
+| Answers need current product catalog prices | RAG or database/tool retrieval | Access changing facts from an external source. |
+
+**Important:** These approaches are not mutually exclusive. A production application may combine prompt engineering, RAG, and fine-tuning.
+
+---
+
+## 16. Fine-tuning Types
+
+- **Pretraining:** Learn general language patterns and knowledge from large datasets.
+- **Supervised fine-tuning (SFT):** Train on input-output examples to teach desired responses.
+- **Instruction tuning:** Improve instruction-following using instruction-response examples.
+- **Parameter-efficient fine-tuning (PEFT):** Use methods such as LoRA to train comparatively small parameter subsets or added parameters.
+
+**Tricky distinction:** Instruction tuning is a form of fine-tuning. Its main purpose is not to retrieve documents at every query, as RAG does.
+
+---
+
+## 17. Decision-Making Scenario MCQs
+
+These questions were supplied without answers in the source notes. The original answer choices are preserved below.
+
+### MCQ 1 — Daily-changing prices
+
+A retail chatbot must answer using product prices that change every day. The model gives yesterday's price even though it writes fluent answers. What is the best architectural improvement?
+
+A. Fine-tune the model on yesterday's prices  
+B. Retrieve current prices from an authoritative source using RAG or a suitable database tool  
+C. Increase temperature  
+D. Add more examples of polite responses
+
+### MCQ 2 — Strict JSON output
+
+A support model understands customer requests but often returns prose when the application requires a strict JSON object. The task knowledge is already sufficient. What should the team try first?
+
+A. Build a large vector database  
+B. Use clear schema instructions and structured-output constraints  
+C. Fine-tune on current product prices  
+D. Increase retrieval Recall@k
+
+### MCQ 3 — Specialized classification
+
+A company has 30,000 labeled support tickets and wants a model to classify them into specialized categories with consistent behavior. The labels are reliable and prompt-only performance is insufficient. Which option is worth evaluating?
+
+A. Fine-tuning on representative labeled examples  
+B. RAG over unrelated public documents  
+C. Increasing context window only  
+D. Changing the system prompt's tone only
+
+### MCQ 4 — Confidential policies and permissions
+
+An HR assistant must answer questions about confidential employee policies. Different employees have different document permissions. What is the most important design requirement?
+
+A. Fine-tune on all confidential documents and let everyone query the model  
+B. Use authorized retrieval with access controls enforced before documents are exposed  
+C. Increase temperature to improve privacy  
+D. Trust the LLM to infer who may see each document
+
+### MCQ 5 — Changing regulations
+
+A team fine-tunes an LLM to use a specific response style. A week later, a regulation changes and the assistant must quote the new rule accurately. What is the strongest general approach?
+
+A. Repeatedly fine-tune every time the rule changes, without testing alternatives  
+B. Use an up-to-date trusted source with retrieval and keep style adaptation separate if useful  
+C. Increase the number of output tokens  
+D. Assume fine-tuning guarantees current facts
+
+### MCQ 6 — Unsupported details despite RAG
+
+A team uses RAG, but retrieved passages are relevant and the model still invents unsupported details. Which intervention best targets the observed failure?
+
+A. Improve grounding instructions, test faithfulness, and support abstention when evidence is insufficient  
+B. Only fine-tune on unrelated writing samples  
+C. Increase the number of documents regardless of relevance  
+D. Remove the source context
+
+### MCQ 7 — Changing knowledge and specialized behavior
+
+A company wants an assistant to answer from a changing knowledge base and also consistently categorize requests according to a specialized taxonomy learned from examples. Which design may be appropriate?
+
+A. RAG for changing knowledge plus fine-tuning if behavior adaptation is justified  
+B. Fine-tuning alone must always handle both requirements  
+C. Prompt engineering can automatically access every private database  
+D. RAG makes all task-specific training unnecessary
+
+### MCQ 8 — Examples in a prompt
+
+A developer adds three examples to a prompt and the model follows the desired pattern more reliably. No model parameters were updated. What is this?
+
+A. Supervised fine-tuning  
+B. Few-shot prompting  
+C. Pretraining  
+D. Vector indexing
+
+**Source quiz status:** 0/8 attempted; a reset option was shown.
+
+---
+
+## 18. Interview Follow-up Questions
+
+### Q1. Can fine-tuning eliminate hallucinations?
+
+No. Fine-tuning may improve task performance or behavior, but it does not guarantee factual accuracy. Grounding, evaluation, and source verification remain important.
+
+### Q2. Does RAG update the LLM's parameters?
+
+No. In standard RAG, external information is retrieved at inference time and added to the model's context. The model parameters are not updated by that retrieval step.
+
+### Q3. What is the difference between few-shot prompting and fine-tuning?
+
+Few-shot prompting provides examples in the current prompt without changing model parameters. Fine-tuning trains the model on examples and updates parameters or trainable components.
+
+### Q4. Can RAG and fine-tuning be used together?
+
+Yes. RAG can provide up-to-date knowledge, while fine-tuning can adapt task-specific behavior. Whether both are necessary depends on evaluation results, cost, and maintenance requirements.
+
+---
+
+## 19. Roadmap Next Steps
+
+The supplied notes identify the following next steps:
+
+1. Advanced retrieval strategies.
+2. Hybrid search.
+3. Reranking.
+4. Retrieval evaluation metrics.
+5. RAG vs fine-tuning scenario questions.
+6. A mixed RAG mock test.
+
+The advanced sections in this file cover hybrid search, reranking, Recall@k, Precision@k, MRR, NDCG, and RAG vs fine-tuning vs prompt engineering scenarios.
