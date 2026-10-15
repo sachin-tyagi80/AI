@@ -854,12 +854,15 @@ Correct Answer: B
 Explanation: A typical autoregressive LLM predicts the next token using the current context and learned parameters. It does not need to retrieve an exact sentence from its training data.
 ### Q2. Training vs Inference — Medium
 A company has trained an LLM for several months using a large dataset. After deployment, thousands of users send questions to the model every day. The model generates answers using its existing learned parameters. A manager claims that every user question automatically trains the model and permanently changes its knowledge. The engineering team must clarify what happens during ordinary model usage.
+
 Which option is correct?
 - A. Training and inference always happen simultaneously.
 - B. Inference normally uses learned parameters without updating them.
 - C. Every prompt updates the model's parameters permanently.
 - D. Inference means retraining the model on the complete dataset.
+
 Correct Answer: B
+
 Explanation: Training adjusts model parameters. Inference uses the trained model to generate predictions; ordinary inference does not automatically update its weights.
 ### Q3. Parameters — Hard
 Two LLMs are being compared by an engineering team. Model X has 7 billion parameters, while Model Y has 70 billion parameters. A team member concludes that Model Y must always provide more accurate answers for every task. However, the models differ in training data, architecture, training quality, and task-specific performance. The team wants to select a model for a real business application.
@@ -868,8 +871,11 @@ Which conclusion is best?
 - B. Fewer parameters always produce fewer hallucinations.
 - C. Parameter count matters, but performance also depends on training, architecture, data, and the task.
 - D. Parameters are the number of documents stored in the model's database.
+- 
+
 Correct Answer: C
 Explanation: More parameters can increase model capacity, but parameter count alone does not determine quality or accuracy.
+
 ### Q4. Transformer Architecture — Hard
 An LLM processes a sentence in which a word's meaning depends on another word far away in the sentence. The model needs to determine which parts of the input are most relevant to understanding the current token. An engineer explains that the architecture uses attention mechanisms to model relationships between tokens. A candidate mistakenly says this mechanism is simply a fixed dictionary lookup.
 Which component is most directly associated with this capability in a Transformer?
@@ -877,8 +883,10 @@ Which component is most directly associated with this capability in a Transforme
 - B. Token counting
 - C. Database indexing
 - D. Data compression alone
+
 Correct Answer: A
 Explanation: Self-attention lets tokens incorporate information from other relevant tokens in the input. It is a core Transformer mechanism.
+
 ### Q5. Tokenization — Medium–Hard
 A developer sends two prompts to an LLM. Both prompts contain approximately 1,000 words, but one includes source code, unusual symbols, and several uncommon technical terms. The other contains simple everyday English. The API reports different token counts for the two prompts. The developer believes this must be a billing error because both prompts have the same number of words.
 What is the best explanation?
@@ -886,8 +894,10 @@ What is the best explanation?
 - B. Tokenization can split text into pieces that do not correspond exactly to words.
 - C. Tokens are counted only after the model generates its answer.
 - D. The model counts only punctuation as tokens.
+
 Correct Answer: B
 Explanation: Tokens can represent whole words, word fragments, punctuation, or other text units. Equal word counts do not guarantee equal token counts.
+
 ### Q6. Context Window — Hard
 An LLM has a context window of 32,000 tokens. A user provides a document containing 50,000 tokens and asks the model to analyze every section. The application does not truncate, chunk, or retrieve any part of the document separately. The model produces a summary that appears complete, but the developer realizes that the entire input could not fit into the available context. The developer wants to understand the limitation.
 Which statement is correct?
@@ -895,8 +905,10 @@ Which statement is correct?
 - B. The context window limits the amount of input and generated content that can be accommodated in a given context.
 - C. The context window determines the number of parameters in the model.
 - D. The model's context window expands automatically whenever a document is too long.
+
 Correct Answer: B
 Explanation: The context window has a token limit. Long documents may require chunking, retrieval, or summarization; omitted content cannot be assumed to have been processed.
+
 ### Q7. Embeddings vs Tokens — Hard
 A search application converts product descriptions into numerical vectors. It uses the vectors to find descriptions with similar meanings, even when they use different words. A new developer claims that these vectors are simply the original tokens represented as ordinary text and that semantic similarity is determined only by identical word matches. The team asks the developer to identify the correct concept.
 Which statement is accurate?
@@ -904,8 +916,10 @@ Which statement is accurate?
 - B. Embeddings are always identical to token IDs.
 - C. Embeddings are the same as the model's context window.
 - D. Embeddings are generated only when a model is fine-tuned.
+
 Correct Answer: A
 Explanation: Embeddings map text or other inputs into numerical vector representations. Token IDs and embeddings are related but are not the same thing.
+
 ### Q8. Hallucination — Medium–Hard
 A customer asks an LLM about a newly released product for which the model has no reliable information. The model responds with a detailed launch date, specifications, and a product code. The answer sounds professional, but the company verifies that the details are fabricated. The team wants to understand why this can happen even when the model generates fluent language.
 What is the best explanation?
@@ -913,8 +927,10 @@ What is the best explanation?
 - B. LLMs can generate plausible but unsupported or incorrect information.
 - C. Hallucination occurs only when the temperature is above 1.
 - D. Hallucination means the model has stopped tokenizing the input.
+
 Correct Answer: B
 Explanation: LLMs can produce convincing but false information. Fluency does not guarantee factual accuracy, and lowering temperature alone cannot eliminate hallucinations.
+
 ### Q9. Temperature — Medium–Hard
 A business uses an LLM for two different tasks. For the first task, it generates creative marketing slogans and wants a wider variety of ideas. For the second, it extracts invoice information and prefers more predictable outputs. Both tasks use the same model, but the developer can configure its sampling temperature. The developer must choose settings that match each task.
 Which choice is most appropriate?
@@ -922,8 +938,10 @@ Which choice is most appropriate?
 - B. Low temperature for creative slogans and high temperature for invoice extraction.
 - C. Higher temperature for creative variety and lower temperature for more predictable extraction.
 - D. Temperature has no effect on token selection.
+
 Correct Answer: C
 Explanation: Higher temperature generally increases output variability; lower temperature generally makes outputs more predictable. Neither setting guarantees correctness.
+
 ### Q10. LLM Limitations — Hard
 A company evaluates an LLM for an important customer-support workflow. The model sometimes gives contradictory answers to similar questions, struggles with missing context, and produces confident but incorrect statements. The team wants to improve reliability without assuming that a more powerful model will solve every issue. They plan to test outputs and introduce safeguards before deployment.
 Which approach is most appropriate?
@@ -931,6 +949,7 @@ Which approach is most appropriate?
 - B. Increase the number of parameters and skip evaluation.
 - C. Evaluate representative cases, validate critical outputs, provide suitable context, and add human escalation where needed.
 - D. Increase temperature and remove restrictions.
+
 Correct Answer: C
 Explanation: Reliable LLM applications need evaluation, appropriate context, validation, and safeguards. No single model setting eliminates every limitation.
 
