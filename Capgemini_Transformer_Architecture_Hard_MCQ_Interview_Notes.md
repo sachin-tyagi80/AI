@@ -1,23 +1,24 @@
 # Transformer Architecture — Basic to Advanced
-
-**Preparation:** Capgemini AI Literacy Round  
-**Format:** Hinglish explanations, core concepts, hard scenario-based MCQs, interview answers, and follow-up questions
+**Capgemini AI Literacy Round | Concepts + Real-world scenarios + MCQs**
 
 ## Contents
-1. Transformer fundamentals and workflow
-2. Self-attention and Query, Key, Value (Q/K/V)
-3. Multi-head attention and positional information
-4. Feed-forward network, residual connections, and layer normalization
-5. Encoder-only, decoder-only, and encoder–decoder architectures
-6. Causal masking and autoregressive generation
-7. Scenario-based practice MCQs
-8. Hard-level scenario MCQs with answers and explanations
-9. Interview questions and follow-ups
-10. Last-minute revision
+
+1. [What is a Transformer?](#1-what-is-a-transformer)
+2. [Why Transformers are important](#2-transformer-kyun-important-hai)
+3. [Basic Transformer workflow](#3-transformer-ka-basic-workflow)
+4. [Self-Attention and Q/K/V](#4-self-attention--sabse-important-concept)
+5. [Multi-Head Attention](#5-multi-head-attention)
+6. [Positional Information](#6-positional-encoding--positional-information)
+7. [Feed-Forward Network, Residual Connections and Layer Normalization](#7-feed-forward-network-residual-connections-aur-layer-normalization)
+8. [Encoder vs Decoder vs Encoder–Decoder](#8-encoder-vs-decoder-vs-encoderdecoder)
+9. [Causal Masking](#9-causal-masking--gpt-style-models-mein)
+10. [Capgemini-style Practice MCQs](#10-capgemini-style-scenario-based-mcqs)
+11. [Hard Scenario-Based MCQs](#part-1-hard-scenario-based-mcqs)
+12. [Interview Questions and Follow-ups](#part-2-transformer-interview-questions--follow-ups)
+13. [Last-Minute Revision](#part-3-last-minute-revision)
 
 ---
 
-**Capgemini AI Literacy Round** | Concepts + Real-world scenarios + MCQs
 Bhai, Tokenization aur Context Window ke baad ab hum Transformer Architecture padhenge. Ye LLMs ko samajhne ka important topic hai, kyunki GPT jaise modern language models Transformer architecture par based hain.
 ## 1. What is a Transformer?
 English definition: A Transformer is a neural network architecture that uses attention mechanisms to process relationships between elements in a sequence, such as words or tokens.
@@ -26,6 +27,8 @@ For example, sentence dekho:
 “The student put the book on the table because it was heavy.”
 
 Yahan “it” ka reference samajhne ke liye model ko surrounding context dekhna padta hai. Attention mechanism different tokens ke relationships ko model karne mein help karta hai.
+
+sam-herman.github.io
 
 ## 2. Transformer kyun important hai?
 Transformer se pehle bhi RNN aur LSTM jaise architectures use hote the. Transformers ne sequence processing ke liye attention-based approach introduce ki, jo training mein parallel processing ko support karti hai.
@@ -122,7 +125,7 @@ Encoder input ko process karta hai; decoder encoder ki representations aur gener
 Example: T5. Common use: translation and text-to-text tasks.
 
 Important distinction: Har Transformer GPT jaisa nahi hota. GPT-style generative LLMs typically decoder-only hote hain, jabki BERT encoder-only architecture ka example hai.
-## 9. Causal Masking — GPT-style Models
+## 9. Causal Masking — GPT-style models mein
 Normal self-attention sequence ke tokens ke beech relationships consider kar sakta hai. Lekin autoregressive text generation mein model ko future target tokens dekhne nahi dene chahiye.
 Causal masking future positions ko mask karta hai, taaki token prediction available previous context par based rahe.
 Example:
@@ -131,11 +134,13 @@ Model next token predict karta hai. Us prediction ke waqt woh training sequence 
 Isliye GPT-style model sequence ko autoregressively generate kar sakta hai:
 The → sky → is → blue
 Har step par actual generation previous context aur model ke predictions par depend karti hai.
-## 10. Capgemini-Style Scenario-Based MCQs
+## 10. Capgemini-style Scenario-Based MCQs
 Ab tricky workplace scenarios solve karo. Ye original practice questions hain, actual Capgemini exam se verified questions nahi.
 ### Transformer Practice Test
+8/8 answered
 
-1. A language model needs to determine which earlier words are relevant to the current word in a sentence. Which Transformer mechanism directly helps model these relationships?
+Difficulty: Medium → Advanced · Select one answer per question.
+## 1. A language model needs to determine which earlier words are relevant to the current word in a sentence. Which Transformer mechanism directly helps model these relationships?
 
 A. Token counting
 
@@ -145,9 +150,10 @@ C. Temperature adjustment
 
 D. Padding
 
+Correct
 Self-attention computes relationships between tokens and combines information based on attention weights.
 
-2. An engineer is building a GPT-style model that predicts the next token. During training, the model must not use future target tokens when predicting the current position. Which technique is appropriate?
+## 2. An engineer is building a GPT-style model that predicts the next token. During training, the model must not use future target tokens when predicting the current position. Which technique is appropriate?
 
 A. Causal masking
 
@@ -157,9 +163,10 @@ C. Word-level tokenization
 
 D. Removing embeddings
 
+Correct
 Causal masking prevents a position from attending to future positions in autoregressive generation.
 
-3. A team wants a model architecture commonly suited to classifying text using contextual representations of the input. Which option is the best match?
+## 3. A team wants a model architecture commonly suited to classifying text using contextual representations of the input. Which option is the best match?
 
 A. Decoder-only GPT architecture exclusively
 
@@ -169,9 +176,10 @@ C. A tokenizer without a neural network
 
 D. Temperature sampling alone
 
+Correct
 Encoder-only models such as BERT are commonly used for language understanding and classification tasks.
 
-4. One attention head is not sufficient to capture all useful token relationships. Which Transformer component allows multiple attention operations to learn different patterns?
+## 4. One attention head is not sufficient to capture all useful token relationships. Which Transformer component allows multiple attention operations to learn different patterns?
 
 A. Multi-head attention
 
@@ -181,9 +189,10 @@ C. Padding token
 
 D. Fine-tuning only
 
+Correct
 Multi-head attention combines multiple attention heads that can learn different relationships or representation patterns.
 
-5. A translation system reads a source sentence, creates an internal representation, and generates a target-language sentence using that representation. Which architecture is a classic fit?
+## 5. A translation system reads a source sentence, creates an internal representation, and generates a target-language sentence using that representation. Which architecture is a classic fit?
 
 A. Encoder–decoder Transformer
 
@@ -193,9 +202,10 @@ C. Tokenizer-only pipeline
 
 D. A vector database by itself
 
+Correct
 An encoder–decoder Transformer is a classic architecture for sequence-to-sequence tasks such as translation.
 
-6. A model receives the same words in different orders, and the order changes the sentence meaning. Which component helps represent token positions or order?
+## 6. A model receives the same words in different orders, and the order changes the sentence meaning. Which component helps represent token positions or order?
 
 A. Positional information
 
@@ -205,9 +215,10 @@ C. Fine-tuning data alone
 
 D. The number of output labels
 
+Correct
 Positional information lets a Transformer distinguish sequence positions or represent order.
 
-7. A deep Transformer is difficult to train reliably. The team adds skip paths that combine a layer's input with its output. Which component are they using?
+## 7. A deep Transformer is difficult to train reliably. The team adds skip paths that combine a layer's input with its output. Which component are they using?
 
 A. Residual connections
 
@@ -217,9 +228,10 @@ C. Causal masking only
 
 D. Vector retrieval
 
+Correct
 Residual connections help information and gradients flow through deep neural networks.
 
-8. An engineer says, “Self-attention and embeddings are the same because both involve vectors.” What is the best correction?
+## 8. An engineer says, “Self-attention and embeddings are the same because both involve vectors.” What is the best correction?
 
 A. Embeddings represent tokens numerically; self-attention uses learned projections and attention weights to combine contextual information
 
@@ -229,10 +241,12 @@ C. Self-attention only splits words into subwords
 
 D. Both terms mean context-window size
 
+Correct
 Embeddings provide vector representations; self-attention computes relationships and mixes information across token positions.
 
 Score: 8/8
-### Quick Revision Sheet
+Retry test
+### Quick revision sheet
 Concept	One-line recall
 Transformer	Attention-based neural network architecture
 Self-attention	Models relationships between tokens
@@ -247,6 +261,8 @@ Encoder–decoder	Example: T5
 Causal masking	Blocks attention to future tokens
 Tumhare roadmap mein next topic: LLM Training & Adaptation — pretraining, fine-tuning aur instruction tuning. Pehle ye Transformer MCQs attempt kar lo, phir aage badhenge.
 
+Convert to PDF
+
 capgimini based hard mcq 10 with ans and interviwer qustion  and follow up qustion in this topic
 
 Bhai, ab Transformer Architecture ke 10 hard-level Capgemini AI Literacy MCQs karte hain. Questions workplace scenarios par based hain, options tricky hain aur har answer ke saath explanation bhi hai. Uske baad interviewer questions aur unke follow-ups bhi milenge.
@@ -259,9 +275,12 @@ A. Increase the number of attention heads.
 B. Apply causal masking so each position cannot attend to future positions.
 C. Replace token embeddings with positional embeddings only.
 D. Increase the temperature during training.
+###
 Answer: B — Apply causal masking.
 Explanation: GPT-style autoregressive models must predict the next token using only the permitted preceding context. Causal masking prevents future-token information leakage. More attention heads or higher temperature do not solve this problem.
+##
 Interviewer follow-up: How is causal self-attention different from bidirectional self-attention?
+##
 Answer: Causal self-attention restricts each token from attending to future positions, while bidirectional self-attention can use both preceding and following tokens within the permitted input.
 
 Q2. Query, Key and Value
@@ -271,9 +290,11 @@ A. Values produce token IDs, Keys calculate temperature, and Queries generate em
 B. Queries and Keys determine attention scores; softmax converts scores into weights; Values are combined using those weights.
 C. Queries directly generate the final answer, while Keys and Values are only used during training.
 D. Keys determine token positions, while Values prevent future-token access.
+##
 Answer: B.
 Explanation: Query–Key compatibility determines how strongly tokens relate. Softmax converts scores into attention weights, which are applied to the Value vectors to produce contextual representations.
 Interviewer follow-up: Why is the dot product scaled by \(\sqrt{d_k}\) in scaled dot-product attention?
+##
 Answer: When key dimensions are large, dot products can become large and make softmax distributions overly sharp. Scaling helps keep values in a more suitable range for stable optimization.
 
 Q3. Multi-Head Attention
@@ -283,9 +304,11 @@ A. Each attention head is guaranteed to learn one specific semantic role.
 B. Multiple heads can learn different attention patterns in different representation subspaces.
 C. Multi-head attention removes the need for training data.
 D. Multiple heads automatically increase the context window.
+##
 Answer: B.
 Explanation: Multiple heads allow the model to represent different relationships or patterns. However, it is not guaranteed that one head will specialize in a specific role, and additional heads do not automatically expand the context window.
 Interviewer follow-up: Does increasing the number of attention heads always improve model accuracy?
+##
 Answer: No. Performance depends on architecture, head dimensions, data, compute and training. More heads can increase cost without guaranteeing better results.
 
 Q4. Positional Information
@@ -300,7 +323,9 @@ C. Increasing the number of output classes
 D. Removing self-attention
 Answer: B.
 Explanation: Self-attention needs access to sequence-order information to distinguish different arrangements of the same tokens. Transformers use positional encodings, relative-position methods or other positional mechanisms, depending on the architecture.
+##
 Interviewer follow-up: Is sinusoidal positional encoding mandatory in every Transformer?
+##
 Answer: No. It is one approach. Modern architectures may use learned positional embeddings, relative position methods, RoPE or other techniques.
 
 Q5. Encoder vs Decoder
@@ -314,7 +339,9 @@ C. Both systems must use an encoder–decoder architecture.
 D. Both systems must use a tokenizer without a Transformer.
 Answer: A.
 Explanation: Encoder-only architectures such as BERT are commonly suited to classification. Decoder-only models such as GPT are widely used for autoregressive generation. These are common design choices, not absolute restrictions; other architectures can perform these tasks too.
+##
 Interviewer follow-up: Why can a BERT-style encoder use information from both sides of a token?
+##
 Answer: Its bidirectional self-attention can attend to permitted tokens on both sides of the current position, making surrounding context available for representation learning.
 
 Q6. Encoder–Decoder Cross-Attention
@@ -324,9 +351,11 @@ A. Positional encoding alone
 B. Cross-attention
 C. Causal masking alone
 D. The tokenizer vocabulary
+##
 Answer: B — Cross-attention.
 Explanation: In a classic encoder–decoder Transformer, the decoder uses cross-attention to access encoder outputs. Decoder self-attention separately models relationships among generated target-side tokens.
 Interviewer follow-up: What is the difference between self-attention and cross-attention?
+##
 Answer: In self-attention, queries, keys and values originate from the same sequence or representation stream. In cross-attention, queries typically come from one stream and keys and values come from another, such as decoder states and encoder outputs.
 
 Q7. Context Window vs Attention Mechanism
@@ -336,8 +365,10 @@ A. The context window always doubles when attention heads double.
 B. More heads automatically eliminate token limits.
 C. Attention heads and context-window capacity are different design properties; more heads do not automatically expand the supported context.
 D. Context windows are determined only by temperature.
+##
 Answer: C.
 Explanation: Attention heads describe how attention is computed. Context capacity depends on the model architecture, positional mechanisms, training and serving constraints. Increasing head count alone does not guarantee a longer context window.
+##
 Interviewer follow-up: What challenges can arise when processing very long sequences with standard full self-attention?
 Answer: Standard full self-attention generally has quadratic scaling in sequence length for attention-score computation. Long contexts can therefore increase memory use, computation and latency.
 
@@ -350,7 +381,9 @@ C. Residual connections provide skip pathways, while normalization can help stab
 D. Both components exist only to count tokens.
 Answer: C.
 Explanation: Residual connections help information and gradients flow through deep networks. Layer normalization supports training stability. Their exact arrangement differs between architectures, and neither guarantees perfect output.
+##
 Interviewer follow-up: Does a residual connection simply copy the input and discard the layer's output?
+##
 Answer: No. In a typical residual block, the input is combined with the transformed output, commonly through addition. Both pathways contribute to the resulting representation.
 
 Q9. Transformer Parallelism
@@ -360,8 +393,11 @@ A. The claim is fully correct for every Transformer.
 B. Training can process multiple positions in parallel with appropriate masking, but autoregressive generation generally depends on previously generated tokens.
 C. Autoregressive models cannot use parallel hardware.
 D. Parallel training means the model does not require tokenization.
+##
 Answer: B.
+
 Explanation: Training computations across sequence positions can be parallelized while causal masking prevents access to future targets. During ordinary autoregressive inference, each new token depends on the preceding generated sequence, although optimized systems can parallelize other parts of the computation.
+##
 Interviewer follow-up: What is KV caching, and why is it useful?
 Answer: KV caching stores previously computed Key and Value representations during autoregressive generation. It avoids recomputing them for the entire prefix at every step, reducing redundant computation and often improving inference speed.
 
@@ -372,62 +408,81 @@ A. A Transformer architecture guarantees factual correctness, so the issue must 
 B. The model should always be replaced with one having more attention heads.
 C. Retrieval quality and grounding need improvement, and answer correctness should be evaluated; Transformer architecture alone does not guarantee factual accuracy.
 D. Tokenization should be disabled so the model can reason directly over raw text.
+##
 Answer: C.
 Explanation: A working Transformer can still produce incorrect answers. If the application uses RAG, retrieval quality and evidence grounding matter, and outputs should be evaluated for factual correctness. Temperature changes alone cannot fix missing or irrelevant evidence.
 Interviewer follow-up: How would you evaluate whether the improved assistant is better?
+##
 Answer: Test it on representative questions and trusted reference answers. Measure answer correctness, relevance, groundedness, retrieval quality, safety, latency and cost. Include difficult and out-of-scope cases.
 ## Part 2: Transformer Interview Questions + Follow-ups
 Ye questions interview mein tumhari conceptual clarity check karne ke liye useful hain. Har primary question ka short, interview-ready answer diya hai, phir ek follow-up question.
-1. What is Transformer architecture, and why is it important for LLMs?
+## 1. What is Transformer architecture, and why is it important for LLMs?
+
+##
 Interview answer
 “A Transformer is a neural network architecture that uses attention mechanisms to model relationships between tokens. It supports parallel processing during training and can learn contextual representations, making it a foundation for many modern language models.”
+##
 Follow-up: What is the role of self-attention?
 Answer: It calculates relationships between tokens and combines information to create context-aware representations.
 
-2. Explain Query, Key and Value in simple terms.
+## 2. Explain Query, Key and Value in simple terms.
+##
 Interview answer:
 “Query represents what a token is looking for, Key represents information used to determine relevance, and Value contains information that is combined according to attention weights.”
+##
 Follow-up: How are attention weights calculated?
 Answer: In scaled dot-product attention, Query–Key scores are scaled and passed through softmax to produce weights used to combine Values.
 
-3. What is the difference between self-attention and cross-attention?
+## 3. What is the difference between self-attention and cross-attention?
+##
 Interview answer:
 “Self-attention models relationships within the same sequence or representation stream. Cross-attention allows one sequence or representation stream to attend to another, such as a decoder attending to encoder outputs.”
+##
 Follow-up: Where is cross-attention used in a classic Transformer?
 Answer: In the decoder of an encoder–decoder Transformer, where decoder queries attend to encoder keys and values.
 
-4. Why does a Transformer need positional information?
+## 4. Why does a Transformer need positional information?
+##
 Interview answer:
 “Attention mechanisms need information about token order to distinguish sequences with different arrangements. Positional information helps the model represent order and position.”
+##
 Follow-up: Name two positional approaches.
 Answer: Learned positional embeddings and Rotary Positional Embeddings (RoPE).
 
-5. What is the difference between encoder-only and decoder-only Transformers?
+## 5. What is the difference between encoder-only and decoder-only Transformers?
+##
 Interview answer:
 “Encoder-only models such as BERT commonly use bidirectional context for language-understanding tasks. Decoder-only models such as GPT commonly use causal attention to generate text autoregressively.”
+##
 Follow-up: Why does GPT use causal masking?
 Answer: To prevent a token prediction from accessing future target tokens.
 
-6. What is multi-head attention?
+## 6. What is multi-head attention?
+##
 Interview answer:
 “Multi-head attention runs multiple attention operations in parallel. Each head can learn different relationships or patterns, and their outputs are combined.”
+##
 Follow-up: Does each head have a guaranteed specific role?
 Answer: No. Heads may specialize, but their individual roles are not guaranteed.
 
-7. Why can long-context processing be computationally expensive?
+## 7. Why can long-context processing be computationally expensive?
+##
 Interview answer:
 “Standard full self-attention compares tokens across a sequence. Its attention computation and memory requirements can grow quadratically with sequence length, making long contexts expensive.”
+##
 Follow-up: Name one way to reduce the practical cost.
 Answer: Use optimized attention implementations, efficient attention architectures, or retrieval to process only relevant context.
 
-8. Why can a Transformer generate incorrect answers despite using attention?
+## 8. Why can a Transformer generate incorrect answers despite using attention?
+##
 Interview answer:
 “Attention helps model relationships between tokens, but it does not guarantee factual correctness. Errors can result from training data, model limitations, missing evidence or poor retrieval.”
+##
 Follow-up: How can a document-based AI assistant reduce this risk?
 Answer: Improve retrieval, ground answers in trusted documents, provide source references where appropriate, and evaluate the answers against reliable evidence.
 
-## Part 3: Last-Minute Revision
-### Must-Remember Concepts
+## Part 3: Last-minute revision
+### Must-remember concepts
 
 - Self-attention → relationships between tokens.
 - Q/K/V → relevance calculation and information combination.
